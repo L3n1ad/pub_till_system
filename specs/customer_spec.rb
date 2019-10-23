@@ -3,6 +3,8 @@ require('minitest/rg')
 require_relative('../customer')
 require_relative('../drink')
 require_relative('../pub')
+require_relative('../food')
+
 
 class CustomerTest < MiniTest::Test
 
@@ -17,6 +19,8 @@ class CustomerTest < MiniTest::Test
     @customer1 = Customer.new("Cat", 20, 22)
     @customer2 = Customer.new("Jack", 20, 12)
     @customer3 = Customer.new("Sofia", 20, 18)
+
+    @food = Food.new("burger", 5, 1)
 
     @pub = Pub.new("Tower", 200, @drinks)
   end
@@ -70,5 +74,9 @@ class CustomerTest < MiniTest::Test
     @customer1.drunkenness = 3
     result = @customer1.drunkenness_check
     assert_equal(false, result)
+  end
+  def test_pay_for_food
+    @customer1.pay_for_food(@food)
+    assert_equal(15, @customer1.wallet)
   end
 end

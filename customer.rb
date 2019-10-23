@@ -20,8 +20,10 @@ class Customer
 
   def drunkenness_check
     return @drunkenness < 3
-  
   end
 
+  def pay_for_food(food)
+    @wallet -= food.price
+  end
 
 end

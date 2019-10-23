@@ -1,10 +1,11 @@
 class Pub
-  attr_reader :name, :till, :drinks
+  attr_reader :name, :till, :stock
+  attr_accessor :stock
 
-  def initialize(name, till, drinks)
+  def initialize(name, till, stock)
     @name = name
     @till = till
-    @drinks = drinks
+    @stock = stock
   end
 
   def add_money_to_till(drink)
@@ -20,6 +21,24 @@ class Pub
     else
       return "Sorry, no drink!"
     end
+  end
+
+  def buy_food(food, customer)
+      customer.pay_for_food(food)
+      add_money_to_till(food)
+      customer.drunkenness -= food.rejuvenation_level
+  end
+
+  def pub_stock_value
+    total_value = 0
+    p @stock.length
+    @stock.each do |drink, amount|
+      # p drink.price
+      # total_value += drink.price * amount
+      p drink
+      p amount
+    end
+    return total_value
   end
 
 
