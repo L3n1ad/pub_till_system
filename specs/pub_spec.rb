@@ -2,15 +2,21 @@ require('minitest/autorun')
 require('minitest/rg')
 require_relative('../pub')
 require_relative('../drink')
+require_relative('../customer')
+
 class PubTest < MiniTest::Test
 
   def setup
 
-    @drink1 = Drink.new("beer", 3)
-    @drink2 = Drink.new("wine", 3)
-    @drink3 = Drink.new("cider", 3)
+    @drink1 = Drink.new("beer", 3, 1)
+    @drink2 = Drink.new("wine", 3, 1)
+    @drink3 = Drink.new("cider", 3, 1)
 
     @drinks = [@drink1, @drink2, @drink3]
+
+    @customer1 = Customer.new("Cat", 20, 22)
+    @customer2 = Customer.new("Jack", 20, 12)
+    @customer3 = Customer.new("Sofia", 20, 18)
 
     @pub = Pub.new("Tower", 200, @drinks)
   end
@@ -30,4 +36,16 @@ class PubTest < MiniTest::Test
     @pub.add_money_to_till(@drink1)
     assert_equal(203, @pub.till)
   end
+
+  def test_buy_drink
+   @pub.buy_drink(@drink1, @customer1)
+   assert_equal(17, @customer1.wallet)
+   assert_equal(203, @pub.till)
+  end
+
+  def test_add_alcohol_level_to_drunkenness
+    @pub.buy_drink(@drink1, @customer1)
+    assert_equal(1, @customer1.drunkenness)
+  end
+
 end
