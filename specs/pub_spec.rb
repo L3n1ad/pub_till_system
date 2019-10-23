@@ -13,7 +13,12 @@ class PubTest < MiniTest::Test
     @drink2 = Drink.new("wine", 3, 1)
     @drink3 = Drink.new("cider", 3, 1)
 
-    @stock = Hash.new(@drink1 => 10, @drink2 => 10, @drink3 => 10)
+    @stock = Hash.new(@drink1 => 5, @drink2 => 5)
+    @stock = Hash.new(0)
+
+    @stock[@drink1] = 10
+    @stock[@drink2] = 10
+    @stock[@drink3] = 10
 
     @food = Food.new("burger", 5, 1)
 
@@ -59,7 +64,6 @@ class PubTest < MiniTest::Test
   def test_buy_drink__right_age_too_drunk
     @customer1.drunkenness = 5
     result = @pub.buy_drink(@drink1, @customer1)
-    p @customer1
     assert_equal("Sorry, no drink!", result)
 
   end
@@ -82,7 +86,6 @@ class PubTest < MiniTest::Test
   end
 
   def test_pub_stock_value
-    p @stock
     result = @pub.pub_stock_value
     assert_equal(90, result)
   end

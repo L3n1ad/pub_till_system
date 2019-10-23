@@ -31,12 +31,11 @@ class Pub
 
   def pub_stock_value
     total_value = 0
-    p @stock.length
     @stock.each do |drink, amount|
       # p drink.price
-      # total_value += drink.price * amount
-      p drink
-      p amount
+      total_value += drink.price * amount
+      # p drink
+      # p amount
     end
     return total_value
   end
