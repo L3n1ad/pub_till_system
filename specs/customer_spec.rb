@@ -57,4 +57,18 @@ class CustomerTest < MiniTest::Test
     assert(result)
   end
 
+  def test_drunkenness__over_limit
+    @customer1.drunkenness = 5
+    result = @customer1.drunkenness_check
+    assert_equal(false, result)
+  end
+  def test_drunkenness__under_limit
+    result = @customer1.drunkenness_check
+    assert_equal(true, result)
+  end
+  def test_drunkenness__on_limit
+    @customer1.drunkenness = 3
+    result = @customer1.drunkenness_check
+    assert_equal(false, result)
+  end
 end

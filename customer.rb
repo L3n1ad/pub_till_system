@@ -18,5 +18,10 @@ class Customer
     return @age >= 18
   end
 
+  def drunkenness_check
+    return @drunkenness < 3
+  
+  end
+
 
 end

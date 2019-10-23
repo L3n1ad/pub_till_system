@@ -48,4 +48,25 @@ class PubTest < MiniTest::Test
     assert_equal(1, @customer1.drunkenness)
   end
 
+  def test_buy_drink__right_age_not_drunk
+    result = @pub.buy_drink(@drink1, @customer1)
+    assert_equal("You bought a drink", result)
+  end
+
+  def test_buy_drink__right_age_too_drunk
+    @customer1.drunkenness = 5
+    result = @pub.buy_drink(@drink1, @customer1)
+    p @customer1
+    assert_equal("Sorry, no drink!", result)
+
+  end
+  def test_buy_drink__under_age_too_drunk
+    @customer2.drunkenness = 5
+    result = @pub.buy_drink(@drink1, @customer2)
+    assert_equal("Sorry, no drink!", result)
+  end
+  def test_buy_drink__under_age_not_drunk
+    result = @pub.buy_drink(@drink1, @customer2)
+    assert_equal("Sorry, no drink!", result)
+  end
 end
